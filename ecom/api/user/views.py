@@ -8,9 +8,10 @@ from .models import CustomUser
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model, login, logout
 from django.views.decorators.csrf import csrf_exempt
-
 import random
 import re
+
+
 # Create your views here.
 
 
@@ -26,7 +27,7 @@ def signin(request):
     password = request.POST['password']
 
 #validation part
-    if not re.match("[\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$", username):
+    if not re.match("^[\w\.\+\-]+\@[\w]+\.[a-z]{2,3}$", username):
         return JsonResponse({'error': 'Enter valid email'})
 
     if len(password) < 3:
